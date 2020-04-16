@@ -8,7 +8,7 @@
 // @run-at       document-start
 // @grant        none
 // @require  https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js
-// @require  https://gist.githubusercontent.com/JanSurft/6166749a7eea008261d1c32e3462f8ca/raw/5c4993c6ef11b3a140280a89a2772b8676a57cbe/rewrite_html.js
+// @require  https://cdn.jsdelivr.net/gh/gingko-extensios/html-filter@0.0.1/src/html-filter.js
 // ==/UserScript==
 
 /*
@@ -31,26 +31,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+/* global run */
+
 "use strict";
-
-// the text to replace in html elements
-const REPLACEMENTS = [
-    [/{#([a-zA-Z0-9_:\-]+)}/gi, "<a name=\"$1\"></a>"],
-    [/@([a-zA-Z0-9_:\-]+)/gi, "<a href=\"#$1\">$1</a>"],
-];
-
-// async function to compoensate for
-// loading time of html dom for code-view elements
-async function start(delay) {
-    let promise = new Promise((resolve, reject) => {
-        setTimeout(() => resolve("done!"), delay);
-    });
-
-    let result = await promise; // wait until the promise resolves (*)
-    // your page initialization code here
-    // the DOM will be available here
-    rewriteHtml(document, REPLACEMENTS);
-}
 
 function until(conditionFunction) {
     const poll = (resolve) => {
@@ -60,6 +43,12 @@ function until(conditionFunction) {
 
     return new Promise(poll);
 }
+
+// the text to replace in html elements
+const REPLACEMENTS = [
+    [/{#([a-zA-Z0-9_:-]+)}/gi, "<a name=\"$1\"></a>"],
+    [/@([a-zA-Z0-9_:-]+)/gi, "<a href=\"#$1\">$1</a>"],
+];
 
 // run if url changes (history api)
 /*
@@ -71,32 +60,18 @@ window.onpopstate = function(event) {
 };
 */
 
-async function waitForAppAndCards() {
-    await until(() => typeof app !== "undefined");
-    await until(() => app.get("cards").length > 0);
+async function waitForRun() {
+    await until(() => typeof run !== "undefined");
 
-    for (const card of app.get("cards").models) {
-        let card_element = document.querySelector("#card" + card.id);
-        rewriteHtml(card_element, REPLACEMENTS);
-    }
-}
-
-async function waitForBackbone() {
-    await until(() => typeof Backbone !== "undefined");
-
-    Backbone.on("card:save", (id) => {
-        let card = document.querySelector("#card" + id);
-        rewriteHtml(card, REPLACEMENTS);
-    });
-
-    Backbone.on("card:deactivate", (id) => {
-        let card = document.querySelector("#card" + id);
-        rewriteHtml(card, REPLACEMENTS);
-    });
+    run(
+        {
+            replacements: REPLACEMENTS,
+        },
+        () => true
+    );
 }
 
 // run on document load
 (function () {
-    waitForBackbone();
-    waitForAppAndCards();
+    waitForRun();
 })();

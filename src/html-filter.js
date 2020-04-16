@@ -1,3 +1,5 @@
+/* global Backbone app */
+
 function hasParentWithMatchingSelector(target, selector) {
     return [...document.querySelectorAll(selector)].some(
         (el) => el !== target && el.contains(target)
@@ -45,3 +47,53 @@ function rewriteHtml(elem, replacements) {
         }
     }
 }
+function until(conditionFunction) {
+    const poll = (resolve) => {
+        if (conditionFunction()) resolve();
+        else setTimeout((_) => poll(resolve), 400);
+    };
+
+    return new Promise(poll);
+}
+
+async function waitForAndRun(condition, run) {
+    await until(condition);
+    run();
+}
+
+function setupBackboneEvents(config) {
+    Backbone.on("card:save", (id) => {
+        let card = document.querySelector("#card" + id);
+        rewriteHtml(card, config.replacements);
+    });
+
+    Backbone.on("card:deactivate", (id) => {
+        let card = document.querySelector("#card" + id);
+        rewriteHtml(card, config.replacements);
+    });
+}
+
+function setupAppEvents(config) {
+    for (const card of app.get("cards").models) {
+        let card_element = document.querySelector("#card" + card.id);
+        rewriteHtml(card_element, config.replacements);
+    }
+}
+
+function run(config, init) {
+    waitForAndRun(
+        () => typeof Backbone !== "undefined",
+        () => {
+            setupBackboneEvents(config);
+        }
+    );
+    waitForAndRun(
+        () => typeof app !== "undefined" && app.get("cards").length > 0,
+        () => {
+            setupAppEvents(config);
+        }
+    );
+    init();
+}
+
+window.run_html_filter = run;
