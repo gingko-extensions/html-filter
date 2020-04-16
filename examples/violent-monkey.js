@@ -1,9 +1,7 @@
 // ==UserScript==
-// @name         ReplaceText
-// @namespace    http://tampermonkey.net/
-// @version      0.1
-// @description  try to take over the world!
-// @author       You
+// @name         gingko-html-filter
+// @version      0.0.2
+// @author       Jan Hermes
 // @include      https://gingkoapp.com/*
 // @run-at       document-start
 // @grant        none
