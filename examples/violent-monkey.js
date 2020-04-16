@@ -8,7 +8,7 @@
 // @run-at       document-start
 // @grant        none
 // @require  https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js
-// @require  https://cdn.jsdelivr.net/gh/gingko-extensios/html-filter@0.0.1/src/html-filter.js
+// @require  https://cdn.jsdelivr.net/gh/JanSurft/gingko-html-filter@0.0.2/src/html-filter.js
 // ==/UserScript==
 
 /*
