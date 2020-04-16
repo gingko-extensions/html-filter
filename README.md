@@ -9,8 +9,8 @@ Currently I use the `violentmonkey` extension for firefox to load this javascrip
 
 ### With Violentmonkey
 
-1. Install the `violentmonkey` extension
-2. Create a new script in the its dashboard
+1. Install the `violentmonkey` extension for your browser
+2. Create a new script in its dashboard
 3. Copy the contents from `examples/violent-monkey.js` into the script
 4. Load the gingko-app homepage
 5. Enjoy
