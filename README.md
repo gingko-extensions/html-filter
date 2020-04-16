@@ -1,6 +1,8 @@
 # html-filter
 filter the markdown text for additional keywords and patterns
 
+![](doc/html-filter.gif)
+
 ## How to use
 
 Currently I use the `violentmonkey` extension for firefox to load this javascript extension on the gingkoapp website.
