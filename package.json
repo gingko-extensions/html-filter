@@ -1,0 +1,25 @@
+{
+  "name": "gingko-html-filter",
+  "version": "0.3.3",
+  "description": "filter the markdown text for additional keywords and patterns",
+  "main": "index.js",
+  "directories": {
+    "example": "examples"
+  },
+  "scripts": {
+    "test": "test-gingko"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gingko-extensions/html-filter.git"
+  },
+  "keywords": [
+    "gingko"
+  ],
+  "author": "Jan Hermes",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gingko-extensions/html-filter/issues"
+  },
+  "homepage": "https://github.com/gingko-extensions/html-filter#readme"
+}
