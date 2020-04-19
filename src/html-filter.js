@@ -22,22 +22,22 @@ function parseHTML(string) {
 // rewrite the text of all child-leaf html elements of `elem`
 // apply the replacements
 function rewriteHtml(elem, replacements) {
-    var elements = elem.getElementsByTagName("*");
+    const elements = elem.getElementsByTagName("*");
 
-    for (var i = 0; i < elements.length; i++) {
-        var element = elements[i];
+    for (const i = 0; i < elements.length; i++) {
+        const element = elements[i];
 
-        for (var j = 0; j < element.childNodes.length; j++) {
-            var node = element.childNodes[j];
+        for (const j = 0; j < element.childNodes.length; j++) {
+            const node = element.childNodes[j];
 
             if (node.nodeType === 3 && hasParentWithMatchingSelector(node, ".view")) {
-                let text = node.nodeValue;
+                const text = node.nodeValue;
                 let replacedText = text;
 
                 for (const [key, value] of replacements) {
                     replacedText = replacedText.replace(key, value);
                 }
-                let dom = parseHTML(replacedText);
+                const dom = parseHTML(replacedText);
 
                 if (replacedText !== text) {
                     // for elem in dom
@@ -47,7 +47,7 @@ function rewriteHtml(elem, replacements) {
 
                         element.replaceChild(last_elem, node);
 
-                        for (var d = dom.length - 2; d >= 0; d--) {
+                        for (const d = dom.length - 2; d >= 0; d--) {
                             if (d >= 0) {
                                 last_elem = element.insertBefore(dom[d], last_elem);
                             }
@@ -76,19 +76,19 @@ async function waitForAndRun(condition, run) {
 
 function setupBackboneEvents(config) {
     Backbone.on("card:save", (id) => {
-        let card = document.querySelector("#card" + id);
+        const card = document.querySelector("#card" + id);
         rewriteHtml(card, config.replacements);
     });
 
     Backbone.on("card:deactivate", (id) => {
-        let card = document.querySelector("#card" + id);
+        const card = document.querySelector("#card" + id);
         rewriteHtml(card, config.replacements);
     });
 }
 
 function setupAppEvents(config) {
     for (const card of app.get("cards").models) {
-        let card_element = document.querySelector("#card" + card.id);
+        const card_element = document.querySelector("#card" + card.id);
         rewriteHtml(card_element, config.replacements);
     }
 }
