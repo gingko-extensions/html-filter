@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         gingko-html-filter
-// @version      0.0.2
+// @version      0.0.3
 // @author       Jan Hermes
 // @include      https://gingkoapp.com/*
 // @run-at       document-start

@@ -1,6 +1,6 @@
 {
   "name": "gingko-html-filter",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "filter the markdown text for additional keywords and patterns",
   "main": "index.js",
   "directories": {
