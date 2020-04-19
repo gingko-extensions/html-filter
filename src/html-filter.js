@@ -24,10 +24,10 @@ function parseHTML(string) {
 function rewriteHtml(elem, replacements) {
     const elements = elem.getElementsByTagName("*");
 
-    for (const i = 0; i < elements.length; i++) {
+    for (let i = 0; i < elements.length; i++) {
         const element = elements[i];
 
-        for (const j = 0; j < element.childNodes.length; j++) {
+        for (let j = 0; j < element.childNodes.length; j++) {
             const node = element.childNodes[j];
 
             if (node.nodeType === 3 && hasParentWithMatchingSelector(node, ".view")) {
@@ -47,7 +47,7 @@ function rewriteHtml(elem, replacements) {
 
                         element.replaceChild(last_elem, node);
 
-                        for (const d = dom.length - 2; d >= 0; d--) {
+                        for (let d = dom.length - 2; d >= 0; d--) {
                             if (d >= 0) {
                                 last_elem = element.insertBefore(dom[d], last_elem);
                             }
