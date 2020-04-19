@@ -5,7 +5,7 @@
 // @include      https://gingkoapp.com/*
 // @run-at       document-start
 // @grant        none
-// @require  https://cdn.jsdelivr.net/gh/gingko-extensions/html-filter@0.0.2/src/html-filter.js
+// @require  https://cdn.jsdelivr.net/gh/gingko-extensions/html-filter@0.0.5/src/html-filter.js
 // ==/UserScript==
 
 /*
