@@ -6,6 +6,12 @@ function hasParentWithMatchingSelector(target, selector) {
     );
 }
 
+var parseHTML = function(str) {
+  var tmp = document.implementation.createHTMLDocument();
+  tmp.body.innerHTML = str;
+  return tmp.body.children;
+};
+
 // rewrite the text of all child-leaf html elements of `elem`
 // apply the replacements
 function rewriteHtml(elem, replacements) {
@@ -24,7 +30,7 @@ function rewriteHtml(elem, replacements) {
                 for (const [key, value] of replacements) {
                     replacedText = replacedText.replace(key, value);
                 }
-                let dom = $.parseHTML(replacedText);
+                let dom = parseHTML(replacedText);
 
                 if (replacedText !== text) {
                     // for elem in dom

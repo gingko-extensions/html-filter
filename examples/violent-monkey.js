@@ -5,7 +5,6 @@
 // @include      https://gingkoapp.com/*
 // @run-at       document-start
 // @grant        none
-// @require  https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js
 // @require  https://cdn.jsdelivr.net/gh/gingko-extensions/html-filter@0.0.2/src/html-filter.js
 // ==/UserScript==
 
