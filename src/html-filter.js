@@ -6,11 +6,6 @@ function hasParentWithMatchingSelector(target, selector) {
     );
 }
 
-// var parseHTML = function(str) {
-//   var tmp = document.implementation.createHTMLDocument();
-//   tmp.body.innerHTML = str;
-//   return tmp.body.children;
-// };
 // Native
 function parseHTML(string) {
   const context = document.implementation.createHTMLDocument();
@@ -22,7 +17,7 @@ function parseHTML(string) {
   context.head.appendChild(base);
 
   context.body.innerHTML = string;
-  return context.body.children;
+  return Array.from(context.body.childNodes);
 }
 // rewrite the text of all child-leaf html elements of `elem`
 // apply the replacements
