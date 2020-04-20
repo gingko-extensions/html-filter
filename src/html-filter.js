@@ -8,16 +8,16 @@ function hasParentWithMatchingSelector(target, selector) {
 
 // Native
 function parseHTML(string) {
-  const context = document.implementation.createHTMLDocument();
+    const context = document.implementation.createHTMLDocument();
 
-  // Set the base href for the created document so any parsed elements with URLs
-  // are based on the document's URL
-  const base = context.createElement('base');
-  base.href = document.location.href;
-  context.head.appendChild(base);
+    // Set the base href for the created document so any parsed elements with URLs
+    // are based on the document's URL
+    const base = context.createElement("base");
+    base.href = document.location.href;
+    context.head.appendChild(base);
 
-  context.body.innerHTML = string;
-  return Array.from(context.body.childNodes);
+    context.body.innerHTML = string;
+    return Array.from(context.body.childNodes);
 }
 // rewrite the text of all child-leaf html elements of `elem`
 // apply the replacements
